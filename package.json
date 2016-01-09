@@ -1,0 +1,25 @@
+{
+  "name": "frontend-nanodegree-mobile-portfolio",
+  "version": "1.0.0",
+  "description": "web page optimisation - using pagespeed as a guide",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klong/frontend-nanodegree-mobile-portfolio.git"
+  },
+  "author": "karl longman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/klong/frontend-nanodegree-mobile-portfolio/issues"
+  },
+  "homepage": "https://github.com/klong/frontend-nanodegree-mobile-portfolio#readme",
+  "devDependencies": {
+    "grunt-contrib-imagemin": "^1.0.0",
+    "grunt-pagespeed": "^2.0.0",
+    "ngrok": "^0.2.2",
+    "psi": "^2.0.2"
+  }
+}
