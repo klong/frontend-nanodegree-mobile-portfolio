@@ -1,7 +1,7 @@
 html {
   font-size: 100%;
   overflow-y: scroll;
-  -webkit-tap-highlight-color: rgba(0,,0,0);
+  -webkit-tap-highlight-color: rgba(0,0,0,0.2);
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: none;
 }
@@ -34,7 +34,7 @@ header p span { font-size: 0.8em; font-weight: normal;}
 .content { padding: 1em 1em; }
 .content li { height: 100px; list-style-type: none; font-size: 1.1em; clear: left; display: block; }
 li a { font-size: 0.9em; font-weight: 800; text-decoration: none; }
-li img { float:right; padding: 1em, 1em; padding-top: 0.6em; }
+li img { float: right; padding: 1em, 1em; padding-top: 0.6em; }
 li p {font-size: 0.9em; font-style: italic; font-weight: 500; }
 
 footer {

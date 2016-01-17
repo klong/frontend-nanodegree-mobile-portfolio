@@ -1,3 +1,9 @@
+
+// NOTE: my solution is based on the commented version from 
+// the Udacity/ fend-office-hours / Web Optimization
+// github repository at https://github.com/udacity/fend-office-hours.git
+// 
+
 /*
 Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
 jank-free at 60 frames per second.
@@ -18,6 +24,12 @@ cameron *at* udacity *dot* com
 
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
+
+
+/*Note: Optimization of images used in site using gulp 'imagesForSite' task
+which builds an 'assets' directory with compressed and differently sized versions of the src images
+the images height and wisths is hard coded into the html to help with layout reflow
+only a subset of these images are used at present*/
 
 'use strict';
 
@@ -147,9 +159,11 @@ pizzaIngredients.crusts = [
 
 // Name generator pulled from http://saturdaykid.com/usernames/generator.html
 // Capitalizes first letter of each word
-String.prototype.capitalize = function () {
+
+// NOTE: this captilize function has been replaced with CSS text-decoration rule in 'pizzastyle.css'
+/*String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
-};
+};*/
 
 // Pulls adjective out of array using random number sent from generator
 function getAdj(x) {
@@ -205,15 +219,15 @@ function getAdj(x) {
         case "scientific":
             var scientific = ["scientific", "technical", "digital", "programming", "calculating", "formulating", "cyberpunk", "mechanical", "technological",
       "innovative", "brainy", "chemical", "quantum", "astro", "space", "theoretical", "atomic", "electronic", "gaseous", "investigative", "solar",
-      "extinct", "galactic"]
+      "extinct", "galactic"];
             return scientific;
         default:
-            var scientific = ["scientific", "technical", "digital", "programming", "calculating", "formulating", "cyberpunk", "mechanical", "technological",
+            var scientificDefault = ["scientific", "technical", "digital", "programming", "calculating", "formulating", "cyberpunk", "mechanical", "technological",
       "innovative", "brainy", "chemical", "quantum", "astro", "space", "theoretical", "atomic", "electronic", "gaseous", "investigative", "solar",
-      "extinct", "galactic"]
-            return scientific;
-    };
-};
+      "extinct", "galactic"];
+            return scientificDefault;
+    }
+}
 
 // Pulls noun out of array using random number sent from generator
 function getNoun(y) {
@@ -277,13 +291,13 @@ function getNoun(y) {
       "universe", "gravity", "darkMatter", "constellation", "circuit", "asteroid"];
             return scifi;
         default:
-            var scifi = ["robot", "alien", "raygun", "spaceship", "UFO", "rocket", "phaser", "astronaut", "spaceman", "planet", "star", "galaxy",
+            var scifiDefault = ["robot", "alien", "raygun", "spaceship", "UFO", "rocket", "phaser", "astronaut", "spaceman", "planet", "star", "galaxy",
       "computer", "future", "timeMachine", "wormHole", "timeTraveler", "scientist", "invention", "martian", "pluto", "jupiter", "saturn", "mars",
       "quasar", "blackHole", "warpDrive", "laser", "orbit", "gears", "molecule", "electron", "neutrino", "proton", "experiment", "photon", "apparatus",
       "universe", "gravity", "darkMatter", "constellation", "circuit", "asteroid"];
-            return scifi;
-    };
-};
+            return scifiDefault;
+    }
+}
 
 var adjectives = ["dark", "color", "whimsical", "shiny", "noise", "apocalyptic", "insulting", "praise", "scientific"]; // types of adjectives for pizza titles
 var nouns = ["animals", "everyday", "fantasy", "gross", "horror", "jewelry", "places", "scifi"]; // types of nouns for pizza titles
@@ -294,47 +308,47 @@ function generator(adj, noun) {
     var nouns = getNoun(noun);
     var randomAdjective = parseInt(Math.random() * adjectives.length);
     var randomNoun = parseInt(Math.random() * nouns.length);
-    // NOTE: moved capitalisation to css text transform rather than do in here in javascript
+    // moved capitalisation to css text transform rather than do in here in javascript
     var name = "the " + adjectives[randomAdjective] + " " + nouns[randomNoun];
     return name;
-};
+}
 
 // Chooses random adjective and random noun
 function randomName() {
     var randomNumberAdj = parseInt(Math.random() * adjectives.length);
     var randomNumberNoun = parseInt(Math.random() * nouns.length);
     return generator(adjectives[randomNumberAdj], nouns[randomNumberNoun]);
-};
+}
 
 // These functions return a string of a random ingredient from each respective category of ingredients.
 var selectRandomMeat = function () {
     var randomMeat = pizzaIngredients.meats[Math.floor((Math.random() * pizzaIngredients.meats.length))];
     return randomMeat;
-}
+};
 
 var selectRandomNonMeat = function () {
     var randomNonMeat = pizzaIngredients.nonMeats[Math.floor((Math.random() * pizzaIngredients.nonMeats.length))];
     return randomNonMeat;
-}
+};
 
 var selectRandomCheese = function () {
     var randomCheese = pizzaIngredients.cheeses[Math.floor((Math.random() * pizzaIngredients.cheeses.length))];
     return randomCheese;
-}
+};
 
 var selectRandomSauce = function () {
     var randomSauce = pizzaIngredients.sauces[Math.floor((Math.random() * pizzaIngredients.sauces.length))];
     return randomSauce;
-}
+};
 
 var selectRandomCrust = function () {
     var randomCrust = pizzaIngredients.crusts[Math.floor((Math.random() * pizzaIngredients.crusts.length))];
     return randomCrust;
-}
+};
 
 var ingredientItemizer = function (string) {
     return "<li>" + string + "</li>";
-}
+};
 
 // Returns a string with random pizza ingredients nested inside <li> tags
 var makeRandomPizza = function () {
@@ -344,15 +358,15 @@ var makeRandomPizza = function () {
     var numberOfNonMeats = Math.floor((Math.random() * 3));
     var numberOfCheeses = Math.floor((Math.random() * 2));
 
-    for (var i = 0; i < numberOfMeats; i++) {
+    for (var mi = 0; mi < numberOfMeats; mi++) {
         pizza = pizza + ingredientItemizer(selectRandomMeat());
     }
 
-    for (var i = 0; i < numberOfNonMeats; i++) {
+    for (var ni = 0; ni < numberOfNonMeats; ni++) {
         pizza = pizza + ingredientItemizer(selectRandomNonMeat());
     }
 
-    for (var i = 0; i < numberOfCheeses; i++) {
+    for (var ci = 0; ci < numberOfCheeses; ci++) {
         pizza = pizza + ingredientItemizer(selectRandomCheese());
     }
 
@@ -360,7 +374,7 @@ var makeRandomPizza = function () {
     pizza = pizza + ingredientItemizer(selectRandomCrust());
 
     return pizza;
-}
+};
 
 // returns a DOM element for each pizza
 var pizzaElementGenerator = function (i) {
@@ -382,7 +396,7 @@ var pizzaElementGenerator = function (i) {
     pizzaContainer.id = "pizza" + i; // gives each pizza element a unique id
     pizzaImageContainer.classList.add("col-md-6");
 
-    pizzaImage.src = "../assets/wAlpha/pizza_small.png";
+    pizzaImage.src = "../assets/wAlpha/pizza_medium.png";
     pizzaImage.classList.add("img-responsive");
     pizzaImageContainer.appendChild(pizzaImage);
     pizzaContainer.appendChild(pizzaImageContainer);
@@ -390,6 +404,7 @@ var pizzaElementGenerator = function (i) {
     pizzaDescriptionContainer.classList.add("col-md-6");
 
     pizzaName = document.createElement("h4");
+    // added a pizzaName class css rule for captilizations
     pizzaName.classList.add("pizzaName");
     pizzaName.innerHTML = randomName();
     pizzaDescriptionContainer.appendChild(pizzaName);
@@ -400,7 +415,9 @@ var pizzaElementGenerator = function (i) {
     pizzaContainer.appendChild(pizzaDescriptionContainer);
 
     return pizzaContainer;
-}
+};
+
+// NOTE: optimization in resizePizzas, through changing slower querySelector function with getElementById
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function (size) {
@@ -428,12 +445,13 @@ var resizePizzas = function (size) {
     // Iterates through pizza elements on the page and changes their widths
     function changePizzaSizes(size) {
         var newwidth;
+        // case values are for % of image source
         switch (size) {
             case "1":
                 newwidth = 25;
                 break;
             case "2":
-                newwidth = 33.3;
+                newwidth = 33.33;
                 break;
             case "3":
                 newwidth = 50;
@@ -441,6 +459,12 @@ var resizePizzas = function (size) {
             default:
                 console.log("bug in sizeSwitcher");
         }
+
+        // NOTE: optimization using 'getElementsByClassName' rather then slower 'querySelectorAll'
+        // also taking the object collection and its computing its length outside of
+        //the for loop, so they are only done once on the function call.
+        // removed the determineDx function
+
         var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
         var randomPizzasLength = randomPizzas.length;
 
@@ -456,13 +480,17 @@ var resizePizzas = function (size) {
     window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
     var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
     console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms");
-}
+};
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends the pizza elements when the page loads
 // 100 random pizzas generated for page
+
+// NOTE: optimization by moving this line out of the for loop
 var pizzasDiv = document.getElementById("randomPizzas");
+
+//pizza elemets 0 .. 1 are hand coded in pizza.html
 for (var i = 2; i < 100; i++) {
     pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
@@ -497,20 +525,29 @@ function animateWhenReady() {
 }
 
 function updatePositions() {
-// The following modified code for sliding background pizzas is from Ilya's demo found at:
-// https://www.igvita.com/slides/2012/devtools-tips-and-tricizzaMoverItemsks/jank-demo.html
+
+// The following code for sliding background pizzas was pulled from Ilya's demo found at:
+// https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
+
+// Moves the sliding background pizzas based on scroll position
 
   window.frame++;
 
   window.performance.mark('mark_start_frame');
 
+  // NOTE: Optimaization by moving the calculation of the
+  // scrollTop and sin phase values out of the for loop
   var top = (document.body.scrollTop / 1250);
   var sinPhaseArray = [];
+
   for (i = 0; i < 5; i++) {
       sinPhaseArray.push(Math.sin(top + i));
-  };
+  }
 
-  // NOTE: window.MoverClassObjects' & 'window.numMovers' are created on DOMContentLoaded event
+  // NOTE: Optimisation by getting object collection of moving pizzas and the collection length 
+  // when the DOMContentLoaded function is run
+  // stored in properties 'window.MoverClassObjects' and window.numMovers
+  
   for (var mover = 0; mover < window.numMovers; mover++) {
     var pos = sinPhaseArray[mover % 5] * 100;  
     window.MoverClassObjects[mover].style.transform = 'translateX(' + pos + 'px)';
@@ -544,7 +581,7 @@ document.addEventListener('DOMContentLoaded', function () {
         elem.style.left = ((i % cols) * s) + 'px';  
         elem.style.top = (Math.floor(i / cols) * s) + 'px';
         document.getElementById('movingPizzas1').appendChild(elem);
-    };
+    }
 
     // precompute the values for animating pizzas store them in globaly available window object
     // these values are used in newupdatePositions on 'scroll' event

@@ -19,12 +19,18 @@ var browserSync = require('browser-sync'),
     through2 = require('through2'),
     gulpIf = require('gulp-if');
 
-/// google pagespeed insights
-var psi = require('psi'),
-    site = 'http://7347faca.ngrok.io/',
-    key = 'nokey';
+/* ////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////
+NOTE: site variable needs to be changed to the url given by 'ngrok http 8080
+after running gulp task on local machine
+
+///////////////////////////////////////////////////////////////////////*/
+
+var psi = require('psi'),
+    site = 'http://a0a03eb7.ngrok.io/',
+    key = '';
+
+////////////////////////////////////////////////////////////////////////
 
 var paths = {
     scripts: ['src/js/*.js', 'src/views/js/*.js'],
@@ -54,7 +60,19 @@ function customPlumber () {
     });
 }
 
-gulp.task('browserSync', function() {
+gulp.task('browserSync:dev', function() {
+    browserSync({
+        server: {
+            baseDir: 'src'
+        },
+        host: 'localhost',
+        port: 8080,
+        open: false,
+        notify: false
+    })
+});
+
+gulp.task('browserSync:dist', function() {
     browserSync({
         server: {
             baseDir: 'dist'
@@ -65,7 +83,6 @@ gulp.task('browserSync', function() {
         notify: false
     })
 });
-
 
 gulp.task('imagesConfig', function () {
 
@@ -176,9 +193,12 @@ gulp.task('imagesForSite', function() {
     }
 );
 
+// google page speed insights tasks
+
 gulp.task('mobile', function () {
     return psi(site, {
-        key: key,
+        // key: key
+        nokey: 'true',
         strategy: 'mobile',
     }).then(function (data) {
         console.log('Speed score: ' + data.ruleGroups.SPEED.score);
@@ -188,7 +208,8 @@ gulp.task('mobile', function () {
 
 gulp.task('desktop', function () {
     return psi(site, {
-        key: key,
+        //key: key,
+        nokey: 'true',
         strategy: 'desktop',
     }).then(function (data) {
         console.log('Speed score: ' + data.ruleGroups.SPEED.score);
@@ -254,9 +275,6 @@ gulp.task('lint', function() {
     return gulp.src(paths.scripts, {base: paths.base})
         .pipe(plugins.jshint('.jshintrc'))
         .pipe(plugins.jshint.reporter('jshint-stylish'))
-        .pipe(browserSync.reload({
-            stream: true
-        }))
 });
 
 // CLEAN Tasks
@@ -282,7 +300,7 @@ gulp.task('cleanCss', function() {
 gulp.task('build-scripts', function() {
     return gulp.src(paths.scripts, {base: paths.base})
             .pipe(customPlumber('Error running scripts task'))
-            // Minify JS files
+            // Minify javascript files
             .pipe(plugins.uglify())
             .pipe(gulp.dest(dist.scripts))
             .pipe(browserSync.reload({
@@ -292,6 +310,7 @@ gulp.task('build-scripts', function() {
 
 gulp.task('build-styles', function (){
     return gulp.src(paths.styles, {base: paths.base})
+        // Minify css files
         .pipe(plugins.cssnano())
         .pipe(gulp.dest(dist.styles))
         .pipe(browserSync.reload({
@@ -299,10 +318,13 @@ gulp.task('build-styles', function (){
 });
 
 gulp.task('build-html', function() {
+
   return gulp.src(paths.content, {base: paths.base})
     // inline any js & css resources flaged 'inline' in html file
-    .pipe(plugins.inlineSource({compress: false}))
-    // minify html file
+    .pipe(plugins.debug({title: 'before:'}))
+    // inline css file links using 'smoosher comments' in html file
+    .pipe(plugins.smoosher())
+    // minify html files
     .pipe(plugins.htmlmin(
         {collapseWhitespace: true, removeComments: true, minifyJS: true, minifyCSS: true}
     ))
@@ -313,37 +335,19 @@ gulp.task('build-html', function() {
     }))
 });
 
+
 gulp.task('build-assets', function() {
     return gulp.src(paths.assets, {base: paths.base})
     .pipe(gulp.dest(dist.assets))
 });
 
-gulp.task('inlinesources', function () {
-    var options = {
-        compress: true
-    };
- 
-    return gulp.src(paths.content, {base: paths.base})
-        .pipe(plugins.inlineSource(options))
-        .pipe(gulp.dest(dist.content))
-        .pipe(browserSync.reload({
-                stream: true
-            }));
-});
+// lint JS, validate html & CSS task
 
-// BUILD tasks
+gulp.task('validate',
+    ['lint', 'validateHtml', 'validateCss']
+);
 
-/*gulp.task('build:dev', function(callBack) {
-    runSequence(['lint', 'validateHtml', 'validateCss'], ['browserSync', 'watch'],
-        callBack
-    )
-});
-*/
-/*gulp.task('buildold', function(callBack) {
-    runSequence(['minStyles'],['inlineMinHtml'],['browserSync', 'watch'],
-        callBack
-    )
-});*/
+// build task
 
 gulp.task('build', function(callback) {
   runSequence('build-clean',
@@ -355,5 +359,5 @@ gulp.task('build', function(callback) {
 
 // default task - run with command 'gulp'
 
-gulp.task('default', ['browserSync', 'watch']);
+gulp.task('default', ['browserSync:dev', 'watch']);
 

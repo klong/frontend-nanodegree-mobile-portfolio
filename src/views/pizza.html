@@ -1,3 +1,5 @@
+<!-- NOTE: this page is not render path optimised-->
+
 <!DOCTYPE HTML>
 <html>
 
@@ -7,11 +9,13 @@
     <meta name="description" content="Udacity FEND Project 4">
     <meta name="author" content="karl longman">
     <title>Cameron Pittman: Pizza</title>
-    
     <link rel="stylesheet" href="css/pizzastyle.css">
     <link rel="stylesheet" href="css/bootstrap-grid.css">
-
 </head>
+<!-- Note: Optimization of images used in site using gulp 'imagesForSite' task
+which builds an 'assets' directory with compressed and differently sized versions of the src images
+the images height and wisths is hard coded into the html to help with layout reflow
+only a subset of these images are used at present -->
 
 <body>
     <div class="container">
@@ -44,8 +48,7 @@
         </div>
         <div id="callToAction" class="row">
             <div class="col-md-4">
-                <img class="pizzeriaPicture" src="../assets/pizzeria_medium.jpg" height="300px" width="400px" class="img-responsive">
-                
+                <img class="pizzeriaPicture img-responsive" src="../assets/pizzeria_medium.jpg" height="300" width="400" alt="pizzeria interior">
                 <!-- Image credit to: http://commons.wikimedia.org/wiki/File:HK_TST_night_%E5%98%89%E8%98%AD%E9%81%93_Granville_Road_restaurant_Paisanos_Pizzeria_pizza_Dec-2013.JPG -->
             </div>
             <div class="col-md-8">
@@ -114,13 +117,13 @@
                     </div>
                     <div id="pizzaSize" class="col-md-6">Medium</div>
                     <div class="col-md-12">
-                        <input id="sizeSlider" type="range" min="1" max="3" value="2" step="1" onchange="resizePizzas(this.value)"></input>
+                        <input id="sizeSlider" type="range" min="1" max="3" value="2" step="1" onchange="resizePizzas(this.value)"/>
                     </div>
                 </div>
                 <div id="randomPizzas" class="row">
                     <div id="pizza0" class="randomPizzaContainer" style="width:33.33%;">
                         <div class="col-md-6">
-                            <img src="../assets/wAlpha/pizza_small.png" height='200' width='155' class="img-responsive">
+                            <img src="../assets/wAlpha/pizza_medium.png" height='300' width='233' class='img-responsive' alt="a pizza">
                         </div>
                         <div class="col-md-6">
                             <h4 class="pizzaName">The Udacity Special</h4>
@@ -137,10 +140,10 @@
                     </div>
                     <div id="pizza1" class="randomPizzaContainer" style="width:33.33%;">
                         <div class="col-md-6">
-                            <img src="../assets/wAlpha/pizza_small.png" height='200' width='155' class="img-responsive">
+                            <img src="../assets/wAlpha/pizza_medium.png" height='300' width='233' class='img-responsive' alt="a pizza">
                         </div>
                         <div class="col-md-6">
-                            <h4 lass="pizzaName">The Cameron Special</h4>
+                            <h4 class="pizzaName">The Cameron Special</h4>
                             <ul>
                                 <li>Chicken</li>
                                 <li>Hot Sauce</li>

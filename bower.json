@@ -1,8 +1,0 @@
-{
-  "name": "frontend-nanodegree-mobile-portfolio",
-  "dependencies": {},
-  "devDependencies": {
-    "bootstrap": "~3.3.6",
-    "jquery": "~2.2.0"
-  }
-}
