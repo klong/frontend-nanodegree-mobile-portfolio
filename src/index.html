@@ -19,32 +19,45 @@
     <link href='css/print.css' rel='stylesheet' media='print'>
 
     <!-- @font-face is inled so is not render blocking  -->
-    <style>@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;src:local('Open Sans'), local('OpenSans') url(http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3ZBw1xU1rKptJj_0jans920.woff2) format('woff2')}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;src:local('Open Sans Bold'), local('OpenSans-Bold') url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzBampu5_7CjHW5spxoeN3Vs.woff2) format('woff2')}
+    <style>
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Open Sans'), local('OpenSans') url(http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3ZBw1xU1rKptJj_0jans920.woff2) format('woff2')
+        }
+
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Open Sans Bold'), local('OpenSans-Bold') url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzBampu5_7CjHW5spxoeN3Vs.woff2) format('woff2')
+        }
     </style>
 
     <!-- setting linked script to async also creates non-blocking javascript -->
-        <script async src='js/perfmatters.js'></script>
+    <script async src='js/perfmatters.js'></script>
 
-        <script>
-            (function(w, g) {
-                w['GoogleAnalyticsObject'] = g;
-                w[g] = w[g] || function() {
-                    (w[g].q = w[g].q || []).push(arguments)
-                };
-                w[g].l = 1 * new Date();
-            })(window, 'ga');
+    <script>
+        (function (w, g) {
+            w['GoogleAnalyticsObject'] = g;
+            w[g] = w[g] || function () {
+                (w[g].q = w[g].q || []).push(arguments)
+            };
+            w[g].l = 1 * new Date();
+        })(window, 'ga');
 
-            // TODO: replace with your Google Analytics profile ID.
-            ga('create', 'UA-XXXX-Y');
-            ga('send', 'pageview');
-        </script>
+        // TODO: replace with your Google Analytics profile ID.
+        ga('create', 'UA-XXXX-Y');
+        ga('send', 'pageview');
+    </script>
 
-        <script async src='http://www.google-analytics.com/analytics.js'></script>
+    <script async src='http://www.google-analytics.com/analytics.js'></script>
 </head>
 
 <body>
 
-<!-- Note: Optimization of images used in site using gulp 'imagesForSite' task
+    <!-- Note: Optimization of images used in site using gulp 'imagesForSite' task
 which builds an 'assets' directory with compressed and differently sized versions of the src images
 the images height and wisths is hard coded into the html to help with layout reflow
 only a subset of these images are used at present -->
@@ -64,7 +77,7 @@ only a subset of these images are used at present -->
         <div class='content'>
             <ul>
                 <li>
-                    <img src='assets/2048_xsmall.png' height='75' alt='2048'>
+                    <img src='assets/2048_small.jpg' height='75' alt='2048'>
                     <a href='project-2048.html'>Build Your Own 2048!</a>
                     <p>I made my own version of 2048. How cool is that!?</p>
                 </li>
