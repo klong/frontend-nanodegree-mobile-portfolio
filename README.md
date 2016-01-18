@@ -1,73 +1,137 @@
-## Website Performance Optimization portfolio project
+##Udacity Front End Developer NanoDegree
+##Project 4:
+##mobile portfolio - Website Performance Optimization
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+####What's needed before you Install?
 
-To get started, check out the repository, inspect the code,
+###npm (Node.js)
+your local machine must node.js installed to allow the npm package manager to run:
 
-### Getting started
+to check if you already have it installed open a terminal and type:
 
-####Part 1: Optimize PageSpeed Insights score for index.html
+`npm -v`
 
-Some useful tips to help you get started:
+ if this returns a version number (like '2.14.1'), you're fine.
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+ If you get an error instead,  you will have to install Node.js on to the local machine;
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+* #####[npm homepage](https://www.npmjs.com/)
+
+* #####[Download a Node.js installer](https://nodejs.org/en/download/)
+
+
+##Install
+
+####clone the git repository to your local machine;
+
+open a terminal where you want to clone to on your local machine
+then type:
+
+`git clone "https://github.com/klong/frontend-nanodegree-mobile-portfolio.git"`
+
+navigate into the 'frontend-nanodegree-mobile-portfolio' directory
+
+`cd frontend-nanodegree-mobile-portfolio`
+
+####Installing the required npm packages
+
+the easiest way to add the npm packages is to type in the terminal:
+
+`npm install`
+
+if you are on linux this should complete sucessfully, adding the npm packages to a new folder called `node_modules`
+(I developed this on a  Fedora 23 latop)
+
+If you are on mac OSX, I had problems with using the default `npm install` installation method
+
+This is because of a npm package called **'gulp-responsive'** that uses a code library called **sharp** to create optimized images.
+
+So, the best way to install on OS X is to install the library dependencies for **sharp** before running **npm install**
+
+`brew install homebrew/science/vips --with-webp --with-graphicsmagick`
+
+and when this long process ends;
+
+`npm install sharp`
+
+Then run the general `npm install` command to add the npm packages needed ;
+
+`npm install`
+
+Sorry, I haven't tested this build process on a windows pc. (Please let me know if it works, so I can udate this README file)
+
+####After `npm install`  stage completes sucessfully
+
+you will see a new direcory in the repo called `node_modules`
+
+##Serve up the optimized `index.html` page
+
+type:
+
+`gulp`
+
+you should see something like this:
+
+![defaul_gulp_dist](https://cloud.githubusercontent.com/assets/131895/12380742/401b381e-bd72-11e5-804b-cf34ddb6f1b5.png)
+
+**note:** the default gulp task is serving the web pages from the optimised build directory 'dist' (not from the 'src' directory').
+
+Also, the terminal is **'watching'** so you can't type any more commands into it will the task is running.
+
+using a **google chrome browser** go to the local web address to see the page:
+
+http://localhost:8080/
+
+![localhost](https://cloud.githubusercontent.com/assets/131895/12380487/0079dec8-bd6c-11e5-84f5-bc5b84b88b9f.png)
+
+
+##Part 1: Optimize the Google PageSpeed Insights score for index.html
 
 1. Open a browser and visit localhost:8080
 1. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ngrok http 8080
-  ```
+  in a new terminal type:
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+  `ngrok http 8080`
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+![ngrok](https://cloud.githubusercontent.com/assets/131895/12380574/dce9dba0-bd6d-11e5-8f7a-be409dff8072.png)
+use google chrome to view the `forwarding address`
 
-####Part 2: Optimize Frames per Second in pizza.html
+**note:** when you run it it will be given a different web address.
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
+You can use this `forwarding address` for input at the ;
 
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
+####[google page speed insights website](https://developers.google.com/speed/pagespeed/insights/)
 
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
+An example result from my ngrok `forwarding address`.
 
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
+Mobile Speed: ****97****, User experience: 100          |  Desktop speed: ****98****
+:-------------------------:|:-------------------------:
+![ngrok_mobile](https://cloud.githubusercontent.com/assets/131895/12380670/68335d56-bd70-11e5-9eb4-963b109683ba.png)  |  ![ngrok_desktop](https://cloud.githubusercontent.com/assets/131895/12380669/681dc2b6-bd70-11e5-849c-4e82493b5996.png)
 
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+##`index.html` optimisations :
 
-### Sample Portfolios
+* ####created an 'offline' gulp task `imagesForSite` to create resized and optimized images in an `asset` directory within the `src` directory. This directory is copied over to the `dist` directory using the gulp task - `build`.
+* ####minified & inlined externaly linked but critical fonts, CSS and javascript files. (see the `build-html` gulp task in `gulpfile.js`)
+* ####used script `asyn` attribute for linked javascript files `analytics.js` and `perfmatters.js`.
+* ####minified `index.html` (removed comments & whitespace)
+* ####capitalizing the random-pizza names by using a `"pizzaName"` class CSS rule instead of javascript in `main.js`.
 
-Feeling uninspired by the portfolio? Here's a list of cool portfolios I found after a few minutes of Googling.
 
-* <a href="http://www.reddit.com/r/webdev/comments/280qkr/would_anybody_like_to_post_their_portfolio_site/">A great discussion about portfolios on reddit</a>
-* <a href="http://ianlunn.co.uk/">http://ianlunn.co.uk/</a>
-* <a href="http://www.adhamdannaway.com/portfolio">http://www.adhamdannaway.com/portfolio</a>
-* <a href="http://www.timboelaars.nl/">http://www.timboelaars.nl/</a>
-* <a href="http://futoryan.prosite.com/">http://futoryan.prosite.com/</a>
-* <a href="http://playonpixels.prosite.com/21591/projects">http://playonpixels.prosite.com/21591/projects</a>
-* <a href="http://colintrenter.prosite.com/">http://colintrenter.prosite.com/</a>
-* <a href="http://calebmorris.prosite.com/">http://calebmorris.prosite.com/</a>
-* <a href="http://www.cullywright.com/">http://www.cullywright.com/</a>
-* <a href="http://yourjustlucky.com/">http://yourjustlucky.com/</a>
-* <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
-* <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
-* <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+##Part 2: Optimize Frames per Second in `views/pizza.html` & `views/js/main.js`
+
+To optimize `views/pizza.html`, you will need to modify `views/js/main.js` until your frames per second rate is 60 fps or higher.
+
+##`pizza.html` optimisations :
+* ####used 'offline' gulp task `imagesForSite` to build resized and optimized image assets (compressed `.jpg` and `.png` images with alpha).
+* ####minified `pizza.html` (removed comments & whitespace), CSS and javascript files using gulp task `build`.
+
+##`main.js` optimisations :
+most of the optimizations needed to improve the frame per seconds of the `pizza.html` page are within the javascript of `main.js`. See comments in `src/views/js/main.js` for more examples.
+
+* ####optimized expensive javascript operations and DOM selection calls inside for-loops within functions, to help increase the speed of both the initial `randomPizzas` and `mover` elements being added to the DOM and the  (low frames per second performance) 'janky' resizing and animation.
+* ####reduced the number of 'mover' class objects created from 200 to a smaller amount (approx 30-50) based on the browser window size.
+* ####used style `transformX()` to animate the `mover` class objects as it is a composite-only operation and is GPU accelerated on some browsers. Added a CSS `will-change: transform` rule to the `mover` class for further look-ahead type browser optimisations ;
+
+##Also done as part of the project:
+* ###used `npm` package manager and `Gulp` task runner to help automate some of the development tasks, such as, the building of optimized assets and a `dist` site, using using `ngrok` and `gulp` tasks for pagespeed insight rating, using `browser-sync` and `watch` to create a more dynamic feedback within the browser, help validate the html and CSS before submitting the project
