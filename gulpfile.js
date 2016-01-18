@@ -60,6 +60,13 @@ function customPlumber() {
     });
 }
 
+// deploy gh-pages to GitHub Task
+gulp.task('deploy', function () {
+    return plugins.gulp.src('./dist/**/*')
+        .pipe(ghPages());
+});
+
+// serve dev version of website locally task
 gulp.task('browserSync:dev', function () {
     browserSync({
         server: {
@@ -72,6 +79,7 @@ gulp.task('browserSync:dev', function () {
     })
 });
 
+// serve dist optimized version of website locally task
 gulp.task('browserSync:dist', function () {
     browserSync({
         server: {
