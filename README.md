@@ -58,7 +58,7 @@ Then run the general `npm install` command to add the npm packages needed ;
 
 `npm install`
 
-Sorry, I haven't tested this build process on a windows pc. (Please let me know if it works, so I can udate this README file)
+Sorry, I haven't tested this build process on a windows pc. (Please let me know if it works, so I can update this README file)
 
 ####After `npm install`  stage completes sucessfully
 
