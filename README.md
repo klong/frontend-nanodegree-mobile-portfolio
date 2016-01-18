@@ -40,7 +40,7 @@ the easiest way to add the npm packages is to type in the terminal:
 `npm install`
 
 if you are on linux this should complete sucessfully, adding the npm packages to a new folder called `node_modules`
-(I developed this on a  Fedora 23 latop)
+(I developed this on a Fedora 23 laptop)
 
 If you are on mac OSX, I had problems with using the default `npm install` installation method
 
@@ -76,7 +76,7 @@ you should see something like this:
 
 **note:** the default gulp task is serving the web pages from the optimised build directory 'dist' (not from the 'src' directory').
 
-Also, the terminal is **'watching'** so you can't type any more commands into it will the task is running.
+Also, the terminal is **'watching'** so you can't type any more commands into it while the task is running.
 
 using a **google chrome browser** go to the local web address to see the page:
 
@@ -99,11 +99,11 @@ use google chrome to view the `forwarding address`
 
 **note:** when you run it it will be given a different web address.
 
-You can use this `forwarding address` for input at the ;
+You can use this for input at the ;
 
 ####[google page speed insights website](https://developers.google.com/speed/pagespeed/insights/)
 
-An example result from my ngrok `forwarding address`.
+An example result from my ngrok address.
 
 Mobile Speed: ****97****, User experience: 100          |  Desktop speed: ****98****
 :-------------------------:|:-------------------------:
@@ -111,11 +111,11 @@ Mobile Speed: ****97****, User experience: 100          |  Desktop speed: ****98
 
 ##`index.html` optimisations :
 
-* ####created an 'offline' gulp task `imagesForSite` to create resized and optimized images in an `asset` directory within the `src` directory. This directory is copied over to the `dist` directory using the gulp task - `build`.
-* ####minified & inlined externaly linked but critical fonts, CSS and javascript files. (see the `build-html` gulp task in `gulpfile.js`)
-* ####used script `asyn` attribute for linked javascript files `analytics.js` and `perfmatters.js`.
-* ####minified `index.html` (removed comments & whitespace)
-* ####capitalizing the random-pizza names by using a `"pizzaName"` class CSS rule instead of javascript in `main.js`.
+* created an 'offline' gulp task `imagesForSite` to create resized and optimized images in an `asset` directory within the `src` directory. This directory is copied over to the `dist` directory using the gulp task - `build`.
+* minified & inlined externaly linked but critical fonts, CSS and javascript files. (see the `build-html` gulp task in `gulpfile.js`)
+* used script `asyn` attribute for linked javascript files `analytics.js` and `perfmatters.js`.
+* minified `index.html` (removed comments & whitespace)
+* capitalizing the random-pizza names by using a `"pizzaName"` class CSS rule instead of javascript in `main.js`.
 
 
 ##Part 2: Optimize Frames per Second in `views/pizza.html` & `views/js/main.js`
@@ -123,15 +123,15 @@ Mobile Speed: ****97****, User experience: 100          |  Desktop speed: ****98
 To optimize `views/pizza.html`, you will need to modify `views/js/main.js` until your frames per second rate is 60 fps or higher.
 
 ##`pizza.html` optimisations :
-* ####used 'offline' gulp task `imagesForSite` to build resized and optimized image assets (compressed `.jpg` and `.png` images with alpha).
-* ####minified `pizza.html` (removed comments & whitespace), CSS and javascript files using gulp task `build`.
+* used 'offline' gulp task `imagesForSite` to build resized and optimized image assets (compressed `.jpg` and `.png` images with alpha).
+* minified `pizza.html` (removed comments & whitespace), CSS and javascript files using gulp task `build`.
 
 ##`main.js` optimisations :
 most of the optimizations needed to improve the frame per seconds of the `pizza.html` page are within the javascript of `main.js`. See comments in `src/views/js/main.js` for more examples.
 
-* ####optimized expensive javascript operations and DOM selection calls inside for-loops within functions, to help increase the speed of both the initial `randomPizzas` and `mover` elements being added to the DOM and the  (low frames per second performance) 'janky' resizing and animation.
-* ####reduced the number of 'mover' class objects created from 200 to a smaller amount (approx 30-50) based on the browser window size.
-* ####used style `transformX()` to animate the `mover` class objects as it is a composite-only operation and is GPU accelerated on some browsers. Added a CSS `will-change: transform` rule to the `mover` class for further look-ahead type browser optimisations ;
+* optimized expensive javascript operations and DOM selection calls inside for-loops within functions, to help increase the speed of both the initial `randomPizzas` and `mover` elements being added to the DOM and the  (low frames per second performance) 'janky' resizing and animation.
+* reduced the number of 'mover' class objects created from 200 to a smaller amount (approx 30-50) based on the browser window size.
+* used style `transformX()` to animate the `mover` class objects as it is a composite-only operation and is GPU accelerated on some browsers. Added a CSS `will-change: transform` rule to the `mover` class for further look-ahead type browser optimisations ;
 
 ##Also done as part of the project:
-* ###used `npm` package manager and `Gulp` task runner to help automate some of the development tasks, such as, the building of optimized assets and a `dist` site, using using `ngrok` and `gulp` tasks for pagespeed insight rating, using `browser-sync` and `watch` to create a more dynamic feedback within the browser, help validate the html and CSS before submitting the project
+* used `npm` package manager and `Gulp` task runner to help automate some of the development tasks, such as, the building of optimized assets and a `dist` site, using using `ngrok` and `gulp` tasks for pagespeed insight rating, using `browser-sync` and `watch` to create a more dynamic feedback within the browser, help validate the html and CSS before submitting the project
